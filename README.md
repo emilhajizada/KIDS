@@ -1,5 +1,5 @@
 ## Diqqetle oxuyun!  
-- Ezbezlemeye calismayin 
-- anlayin ozunuz yazin serbest yazmagi praktika edin !!!
+- Ezberlemeye calismayin 
+- Anlayin ozunuz yazin serbest yazmagi praktika edin !!!
 
 # Ugurlar :)
