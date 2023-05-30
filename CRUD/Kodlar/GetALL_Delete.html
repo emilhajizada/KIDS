@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1%;
+      }
+      .card {
+        width: 23%;
+        margin-bottom: 15px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./Create.html">Go To create</a>
+
+    <div class="card_container">
+      <!-- <div class="card">
+        <p>name</p>
+        <p>dec</p>
+      </div> -->
+    </div>
+
+    <script>
+      const card_container = document.querySelector(".card_container");
+      function createCard(dataFromAPI) {
+        const div = document.createElement("div");
+        const h3 = document.createElement("h3");
+        const p = document.createElement("p");
+        const del_button = document.createElement("button");
+
+        div.classList.add("card");
+
+        h3.innerHTML = dataFromAPI.name;
+        p.innerHTML = dataFromAPI.description;
+        del_button.innerText = "X";
+
+        del_button.onclick = () => {
+          fetch("http://localhost:3000/cards/" + dataFromAPI.id, {
+            method: "delete",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              //icini temizleyirik
+              card_container.innerHTML = "";
+              // yeniden yaradiriq
+              getAll();
+            });
+        };
+
+        div.append(h3, p, del_button);
+        card_container.append(div);
+      }
+      function getAll() {
+        fetch("http://localhost:3000/cards")
+          .then((res) => res.json())
+          .then((data) => {
+            data.forEach((x) => {
+              createCard(x);
+            });
+          });
+      }
+
+      getAll();
+    </script>
+  </body>
+</html>

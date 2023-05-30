@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <form action="" style="display: flex; flex-direction: column">
+        <input id="name" type="text" placeholder="name" />
+        <input id="desc" type="text" placeholder="decsription" />
+        <button id="btn">add</button>
+      </form>
+    </main>
+    <script>
+      const btn = document.getElementById("btn");
+      const name = document.getElementById("name");
+      const desc = document.getElementById("desc");
+
+      btn.onclick = (e) => {
+        e.preventDefault();
+        postData();
+      };
+
+      function getValueOfFrom() {
+        return JSON.stringify({
+          name: name.value,
+          description: desc.value,
+        });
+      }
+      function postData() {
+        fetch("http://localhost:3000/cards", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: getValueOfFrom(),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      }
+    </script>
+  </body>
+</html>
